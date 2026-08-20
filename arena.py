@@ -21,7 +21,9 @@ def run_round(prompt: str) -> None:
 
     print()
     for model, result in zip(MODELS, results):
-        print(f"--- {model['name']} ({result['latency_ms']} ms) ---")
+        retries = result.get("retries", 0)
+        suffix = f", {retries} reintento(s)" if retries else ""
+        print(f"--- {model['name']} ({result['latency_ms']} ms{suffix}) ---")
         if result["ok"]:
             tokens = result["tokens"]
             if tokens is not None:

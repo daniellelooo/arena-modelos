@@ -43,6 +43,10 @@ terminar.
 
 ## Notas
 
-Los modelos `:free` de OpenRouter tienen límites de uso agresivos (rate limits por
-minuto y por día). Si un modelo falla o da timeout, la arena lo marca como "no
-disponible" y sigue con los demás.
+Los modelos `:free` de OpenRouter comparten cuota de cuenta: 20 requests/minuto y
+50/día en total entre todos los `:free` (1000/día si alguna vez compraste $10 de
+crédito). Aparte de eso, cada modelo tiene su propio proveedor upstream, que a veces
+se satura y devuelve 429 aunque no hayas tocado tu cuota — para eso la arena reintenta
+automáticamente hasta 3 veces con backoff creciente (`MAX_RETRIES` y
+`RETRY_BACKOFF_SECONDS` en `config.py`). Si un modelo sigue fallando después de
+reintentar, o da timeout, se marca como "no disponible" y la arena sigue con los demás.

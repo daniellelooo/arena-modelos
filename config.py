@@ -17,3 +17,8 @@ MODELS = [
 JUDGE_MODEL = {"id": "nvidia/nemotron-3-nano-30b-a3b:free", "name": "Nemotron 3 Nano 30B"}
 
 TIMEOUT_SECONDS = 60
+
+# Reintentos solo para 429 "rate-limited upstream" — el proveedor de ese modelo
+# gratuito está momentáneamente saturado, no es un límite de tu cuenta.
+MAX_RETRIES = 3
+RETRY_BACKOFF_SECONDS = 2
