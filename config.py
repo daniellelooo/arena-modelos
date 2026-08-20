@@ -3,14 +3,17 @@
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Familias distintas para que la comparación tenga sentido.
-# Si alguno deja de estar disponible como :free, cámbialo aquí.
+# OpenRouter rota este catálogo seguido — si un modelo empieza a dar 404
+# ("unavailable for free" o "no endpoints found"), revisa la lista viva:
+#   curl -s https://openrouter.ai/api/v1/models | python3 -c \
+#     "import json,sys; [print(m['id']) for m in json.load(sys.stdin)['data'] if m['id'].endswith(':free')]"
 MODELS = [
-    {"id": "meta-llama/llama-3.3-70b-instruct:free", "name": "Llama 3.3 70B"},
-    {"id": "google/gemini-2.0-flash-exp:free", "name": "Gemini 2.0 Flash"},
-    {"id": "deepseek/deepseek-r1:free", "name": "DeepSeek R1"},
-    {"id": "qwen/qwen-2.5-72b-instruct:free", "name": "Qwen 2.5 72B"},
+    {"id": "openai/gpt-oss-20b:free", "name": "GPT-OSS 20B"},
+    {"id": "google/gemma-4-31b-it:free", "name": "Gemma 4 31B"},
+    {"id": "z-ai/glm-5.2:free", "name": "GLM 5.2"},
+    {"id": "nvidia/nemotron-3-super-120b-a12b:free", "name": "Nemotron 3 Super 120B"},
 ]
 
-JUDGE_MODEL = {"id": "mistralai/mistral-small-3.1-24b-instruct:free", "name": "Mistral Small 3.1"}
+JUDGE_MODEL = {"id": "nvidia/nemotron-3-nano-30b-a3b:free", "name": "Nemotron 3 Nano 30B"}
 
 TIMEOUT_SECONDS = 60

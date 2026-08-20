@@ -6,9 +6,16 @@ la mejor sin saber qué modelo la escribió.
 
 ## Modelos incluidos
 
-Ver [`config.py`](config.py). Por defecto: Llama 3.3 70B, Gemini 2.0 Flash, DeepSeek R1
-y Qwen 2.5 72B, con Mistral Small 3.1 como juez. Si alguno deja de estar disponible como
-`:free`, cámbialo ahí.
+Ver [`config.py`](config.py). Por defecto: GPT-OSS 20B, Gemma 4 31B, GLM 5.2 y Nemotron 3
+Super 120B, con Nemotron 3 Nano 30B como juez.
+
+OpenRouter rota el catálogo `:free` seguido — si un modelo empieza a dar 404, revisa la
+lista viva y cambia el slug en `config.py`:
+
+```bash
+curl -s https://openrouter.ai/api/v1/models | python3 -c \
+  "import json,sys; [print(m['id']) for m in json.load(sys.stdin)['data'] if m['id'].endswith(':free')]"
+```
 
 ## Instalación
 
